@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>test</title>
+	<script type="text/javascript" src="jquery-1.11.3.js"></script>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+		.score{
+			width:400px;
+			height:400px;
+			margin:50px auto;
+			border:5px solid #ccc;
+		}
+		.score h4{
+			font-family:"微软雅黑";
+			font-size:32px;
+			color:#fff;
+			background-color:#099;
+			text-align:center;
+			line-height:40px;
+			font-weight:normal;
+		}
+		.cont{
+			width:370px;
+			height:360px;
+			margin:0 auto;
+		}
+		.overall_rating{
+			width:100%;
+			height:50px;
+			border-bottom:1px solid #f00;
+		}
+		.overall_rating .num{
+			display:block;
+			height:50px;
+			text-align:center;
+			line-height:50px;
+			font-family:"Arial";
+			font-size:36px;
+			margin-right:10px;
+			float:left;
+		}
+		.overall_rating .bg_start{
+			display:block;
+			float:left;
+			width:191px;
+			height:29px;
+			background:url(star.gif) 0px -150px no-repeat;
+			margin:10px 10px 10px 0px;
+		}
+		.overall_rating .rated{
+			display:block;
+			float:left;
+			margin-top:10px;
+			font-family:"微软雅黑";
+			font-size:16px;
+			color:#000;
+		}
+		.cont .division_evaluation{
+			width:100%;
+			height:160px;
+		}
+		.division_evaluation .text{
+			font-family:"微软雅黑";
+			font-size:14px;
+			color:#000;
+			padding:5px 0px;
+		}
+		.division{
+			width:100%;
+			height:30px;
+			line-height:30px;
+			margin-bottom:10px;
+		}
+		.title{
+			display:inline-block;
+			float:left;
+			font-family:"微软雅黑";
+			font-size:14px;
+			color:#000;
+			margin-right:15px;
+		}
+		.small_start{
+			display:inline-block;
+			float:left;
+			width:116px;
+			height:19px;
+			margin:6px 15px 5px 0px;
+			background:url(star_small.gif) 0px -100px no-repeat;
+			cursor:pointer;
+		}
+		.mark{
+			display:inline-block;
+			float:left;
+			font-family:"微软雅黑";
+			font-size:14px;
+			color:#f00;
+			margin-right:15px;
+			font-weight:bold;
+		}
+		.rated{
+			display:inline-block;
+			float:left;
+			font-family:"微软雅黑";
+			font-size:14px;
+			color:#000;
+		}
+		.comment{
+			height:149px;
+		}
+		.comment h5{
+			font-family:"微软雅黑";
+			font-size:14px;
+			color:#000;
+			font-weight:normal;
+		}
+		.container{
+			padding-left:10px;
+			padding-right:10px;
+			height:78px;
+			border:2px solid #d9d9d9;
+		}
+		#content{
+			border:0px none;
+			width:100%;
+			height:78px;
+			outline:0px none;
+			font-family:"微软雅黑";
+			font-size:16px;
+			color:#000;
+		}
+		.btn{
+			display:block;
+			width:80px;
+			padding:0px 10px;
+			line-height:36px;
+			font-family:"微软雅黑";
+			font-size:20px;
+			color:#2b2b2b;
+			background-color:#d9d9d9;
+			text-align:center;
+			text-decoration:none;
+			margin-top:8px;
+			margin-left:15px;
+			border-radius:5px;
+			float:right;
+		}
+		.reset{
+			display:block;
+			width:80px;
+			padding:0px 10px;
+			line-height:36px;
+			font-family:"微软雅黑";
+			font-size:20px;
+			color:#2b2b2b;
+			background-color:#d9d9d9;
+			text-align:center;
+			text-decoration:none;
+			margin-top:8px;
+			border-radius:5px;
+			float:right;
+		}
+	</style>
+</head>
+<body>
+	<div class="score">
+		<h4>我的评分</h4>
+		<div class="cont">
+			<div class="overall_rating">
+				<span class="num">
+					<big>5</big><small>.0</small>
+				</span>
+				<span class="bg_start"></span>
+				<em class="rated">( 一般 )</em>
+			</div>
+			<div class="division_evaluation">
+				<p class="text">请点击以下星级进行评分：我的评分=(故事+更新+文笔)/3</p>
+				<div class="division story">
+					<span class="title">故事：</span>
+					<span class="small_start"></span>
+					<span class="mark">5</span>
+					<em class="rated">( 一般 )</em>
+				</div>
+				<div class="division update">
+					<span class="title">更新：</span>
+					<span class="small_start"></span>
+					<span class="mark">5</span>
+					<em class="rated">( 一般 )</em>
+				</div>
+				<div class="division writings">
+					<span class="title">文笔：</span>
+					<span class="small_start"></span>
+					<span class="mark">5</span>
+					<em class="rated">( 一般 )</em>
+				</div>
+			</div>
+			<div class="comment">
+				<h5>我的牛评：</h4>
+				<div class="container">
+					<textarea id="content" name="content" rows="5" cols="47"></textarea>
+				</div>
+				<a href="javascript:void(0);" class="btn">提交</a>
+				<a href="javascript:void(0);" class="reset">重置</a>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var small_star = $(".small_start").width()/10;
+		
+	})
+</script>
+</html>
